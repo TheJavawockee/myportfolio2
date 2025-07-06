@@ -25,6 +25,20 @@ header, footer {
     gap: 2em;
     padding: 0;
     margin: 0 0 1em 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #ff5ca7 #fff176;
+    max-width: 100vw;
+}
+
+.nav::-webkit-scrollbar {
+    height: 6px;
+    background: #fff176;
+}
+.nav::-webkit-scrollbar-thumb {
+    background: #ff5ca7;
+    border-radius: 4px;
 }
 
 .nav li {
@@ -150,12 +164,68 @@ button:hover, .modal-content button:hover {
     color: #00f2fe;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     main {
+        max-width: 98vw;
+        margin: 1em 1vw;
         padding: 1em;
+    }
+    .nav {
+        gap: 0.5em;
+        flex-wrap: wrap;
+    }
+    .nav a {
+        font-size: 0.9em;
+        padding: 0.5em 0.8em;
+    }
+    h1, h2, h3 {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 600px) {
+    header, footer {
+        padding: 1em 0 0.7em 0;
+    }
+    .nav {
+        flex-direction: row;
+        gap: 0.5em;
+        overflow-x: auto;
+        max-width: 100vw;
+        padding-bottom: 0.5em;
+    }
+    .nav a {
+        min-width: 90px;
+        font-size: 0.95em;
+        padding: 0.5em 0.8em;
+        display: inline-block;
+    }
+    main {
+        padding: 0.5em;
+        margin: 0.5em 0.5vw;
+        border-radius: 8px;
     }
     .team {
         flex-direction: column;
-        gap: 1em;
+        gap: 0.5em;
+    }
+    .team-member {
+        padding: 1em 0.5em;
+        margin: 0.2em 0;
+    }
+    .team-member img {
+        width: 60px;
+        height: 60px;
+    }
+    .modal-content {
+        padding: 1em 0.5em;
+        max-width: 95vw;
+    }
+    h1, h2, h3 {
+        font-size: 1em;
+    }
+    button, .modal-content button {
+        font-size: 0.9em;
+        padding: 0.5em 1em;
     }
 }
