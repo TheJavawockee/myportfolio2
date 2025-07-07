@@ -15,6 +15,7 @@
                 <li><a href="contact.html">CONTACT</a></li>
                 <li><a href="gallery.html">GALLERY</a></li>
                 <li><a href="merch.html">MERCH</a></li>
+                <li><a href="games.html">GAMES</a></li>
             </ul>
         </nav>
         <h1>The Javawockee</h1>
@@ -26,6 +27,19 @@
         </div>
         <p>This is a simple static website. Edit <code>index.html</code>, <code>style.css</code>, and <code>script.js</code> to customize it.</p>
         <button id="helloBtn">Click Me!</button>
+        <div style="text-align:center; margin:2em 0;">
+            <button id="showFormBtn" class="form-btn" style="padding:0.7em 1.5em; font-size:1.1em; border-radius:8px; border:none; background:#5eeaff; color:#222; cursor:pointer;">
+                Check In (Name & Age)
+            </button>
+        </div>
+        <div id="googleFormContainer" style="display:none; text-align:center; margin-bottom:2em;">
+            <!-- Replace the src URL below with your actual Google Form embed link -->
+            <iframe id="googleFormIframe"
+                src="https://docs.google.com/forms/d/e/1FAIpQLScUeW4LYnxnUfLoHPiyAQWlz1aK-h6-eQssi4IzL9B9LKMR1A/viewform?usp=sharing&ouid=115158317429088896898=true"
+                width="340" height="600" frameborder="0" marginheight="0" marginwidth="0" style="background:#fff;border-radius:12px;">
+                Loading…
+            </iframe>
+        </div>
         <div id="customModal" class="modal" style="display:none;">
             <div class="modal-content">
                 <span class="close" id="closeModal">&times;</span>
@@ -38,5 +52,12 @@
         <p>&copy; 2025 The Javawockee</p>
     </footer>
     <script src="script.js"></script>
+    <script>
+        // Show/hide Google Form on button click
+        document.getElementById('showFormBtn').onclick = function() {
+            const formDiv = document.getElementById('googleFormContainer');
+            formDiv.style.display = formDiv.style.display === 'none' ? 'block' : 'none';
+        };
+    </script>
 </body>
 </html>
