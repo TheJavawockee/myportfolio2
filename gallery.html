@@ -15,16 +15,93 @@
                 <li><a href="contact.html">CONTACT</a></li>
                 <li><a href="gallery.html">GALLERY</a></li>
                 <li><a href="merch.html">MERCH</a></li>
+                <li><a href="games.html">GAMES</a></li>
+                <li><a href="sponsorships.html">SPONSORSHIPS</a></li>
             </ul>
         </nav>
         <h1>Gallery</h1>
     </header>
     <main>
-        <p>Welcome to the gallery page. Here are some of our works.</p>
-        <!-- Gallery content goes here -->
+        <p>Welcome to the gallery page. Here are some my work.</p>
+        <section class="gallery">
+          <div class="gallery-grid">
+            <div class="gallery-hover-wrap">
+              <img src="images/Ford-Mustang.jpeg" alt="Ford Mustang" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Kombat.jpeg" alt="Kombat" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Lambo.jpeg" alt="Lambo" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Landscape-1.png" alt="Landscape 1" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Landscape-2.png" alt="Landscape 2" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Logo.png" alt="Logo" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Mclaren.jpeg" alt="Mclaren" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Merch-1.png" alt="Merch 1" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Merch-2.png" alt="Merch 2" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Mustang.jpeg" alt="Mustang" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Planet.jpeg" alt="Planet" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Souls.jpeg" alt="Souls" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Tree.jpeg" alt="Tree" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Warhammer.png" alt="Warhammer" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Disney-Baby.png" alt="Disney Baby" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Disney-Couple1.png" alt="Disney Couple 1" class="gallery-img">
+            </div>
+            <div class="gallery-hover-wrap">
+              <img src="images/Disney-Family.png" alt="Disney Family" class="gallery-img">
+            </div>
+          </div>
+        </section>
+        <div id="img-modal" class="img-modal">
+          <span class="img-modal-close" id="img-modal-close">&times;</span>
+          <img class="img-modal-content" id="img-modal-img" alt="Full size image">
+        </div>
     </main>
     <footer>
         <p>&copy; 2025 The Javawockee</p>
     </footer>
+    <script>
+document.querySelectorAll('.gallery-img').forEach(img => {
+  img.addEventListener('click', function() {
+    const modal = document.getElementById('img-modal');
+    const modalImg = document.getElementById('img-modal-img');
+    modal.style.display = "flex";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+  });
+});
+document.getElementById('img-modal-close').onclick = function() {
+  document.getElementById('img-modal').style.display = "none";
+};
+document.getElementById('img-modal').onclick = function(e) {
+  if (e.target === this) this.style.display = "none";
+};
+</script>
 </body>
 </html>

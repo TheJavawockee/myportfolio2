@@ -1,3 +1,4 @@
+/* ...existing code... */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
@@ -164,6 +165,96 @@ button:hover, .modal-content button:hover {
     color: #00f2fe;
 }
 
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+    overflow: visible;
+}
+
+.gallery-img {
+    width: 100%;
+    max-width: 420px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    transition: 
+        box-shadow 0.2s,
+        filter 0.2s,
+        z-index 0.2s;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    z-index: 1;
+    position: relative;
+}
+
+/* --- FULL IMAGE ON HOVER (MODAL-LIKE) --- */
+.gallery-img::after {
+    content: "";
+    display: none;
+}
+
+.gallery-img:hover,
+.gallery-img:focus {
+    filter: brightness(0.7) blur(2px);
+    z-index: 2;
+}
+
+/* Overlay for full image */
+.gallery-img:hover::after,
+.gallery-img:focus::after {
+    content: "";
+    display: block;
+    position: fixed;
+    left: 0; top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Show the full image on hover using a pseudo-element */
+.gallery-img:hover::before,
+.gallery-img:focus::before {
+    content: "";
+    display: block;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: auto;
+    height: auto;
+    min-width: 200px;
+    min-height: 100px;
+    max-width: 90vw;
+    max-height: 90vh;
+    background: url(attr(src)) center center / contain no-repeat, #222;
+    border-radius: 16px;
+    box-shadow: 0 8px 48px 8px rgba(0,0,0,0.85);
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    pointer-events: none;
+    aspect-ratio: unset;
+}
+
+/* Hide the original image when showing the full image */
+.gallery-img:hover,
+.gallery-img:focus {
+    opacity: 0.2;
+}
+
+/* Responsive: fallback to scale on small screens */
+@media (max-width: 900px) {
+    .gallery-img:hover::before,
+    .gallery-img:focus::before {
+        max-width: 98vw;
+        max-height: 70vh;
+    }
+}
+
 @media (max-width: 900px) {
     main {
         max-width: 98vw;
@@ -228,4 +319,93 @@ button:hover, .modal-content button:hover {
         font-size: 0.9em;
         padding: 0.5em 1em;
     }
+}
+
+/* Modal for full image */
+.img-modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.92);
+  justify-content: center;
+  align-items: center;
+}
+.img-modal-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 48px 8px rgba(0,0,0,0.85);
+  background: #222;
+}
+.img-modal-close {
+  position: absolute;
+  top: 32px;
+  right: 48px;
+  font-size: 2.5rem;
+  color: #fff176;
+  cursor: pointer;
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  z-index: 2100;
+  text-shadow: 2px 2px 8px #ff5ca7;
+  transition: color 0.2s;
+}
+.img-modal-close:hover {
+  color: #ff5ca7;
+}
+
+.gallery-hover-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery-img-full {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  max-width: 90vw;
+  max-height: 90vh;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+  box-shadow: 0 8px 48px 8px rgba(0,0,0,0.85);
+  border-radius: 16px;
+  background: #222;
+  pointer-events: none;
+}
+
+.gallery-hover-wrap:hover .gallery-img-full,
+.gallery-hover-wrap:focus-within .gallery-img-full {
+  display: block;
+}
+
+.gallery-hover-wrap:hover .gallery-img,
+.gallery-hover-wrap:focus-within .gallery-img {
+  filter: brightness(0.5) blur(2px);
+}
+
+.merch-grid {
+    display: flex;
+    gap: 2em;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2em 0;
+}
+
+.merch-img {
+    max-width: 240px;   /* Increased from 160px to 240px */
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: block;
+}
+
+.merch-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
 }
