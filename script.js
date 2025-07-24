@@ -69,26 +69,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 3000);
     });
-
-    // Gallery modal logic
-    const modal = document.getElementById('galleryModal');
-    const modalImg = document.getElementById('modalImg');
-    const closeBtn = document.getElementById('closeModal');
-    document.querySelectorAll('.gallery-img').forEach(img => {
-        img.addEventListener('click', () => {
-            modal.classList.add('active');
-            modalImg.src = img.src;
-            modalImg.alt = img.alt;
-        });
-    });
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-        modalImg.src = '';
-    });
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-            modalImg.src = '';
-        }
-    });
 });
