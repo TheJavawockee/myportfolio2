@@ -1,0 +1,73 @@
+const C3 = self.C3;
+self.C3_GetObjectRefTable = function () {
+	return [
+		C3.Plugins.Sprite,
+		C3.Behaviors.Pathfinding,
+		C3.Behaviors.Flash,
+		C3.Plugins.Touch,
+		C3.Plugins.TiledBg,
+		C3.Behaviors.solid,
+		C3.Behaviors.Turret,
+		C3.Behaviors.Bullet,
+		C3.Plugins.Particles,
+		C3.Plugins.Text,
+		C3.Plugins.System.Cnds.IsGroupActive,
+		C3.Plugins.System.Cnds.OnLayoutStart,
+		C3.Behaviors.Pathfinding.Acts.FindPath,
+		C3.Plugins.Sprite.Exps.X,
+		C3.Plugins.Sprite.Exps.Y,
+		C3.Plugins.System.Acts.WaitForPreviousActions,
+		C3.Behaviors.Pathfinding.Acts.StartMoving,
+		C3.Plugins.System.Cnds.Every,
+		C3.Plugins.Sprite.Acts.Spawn,
+		C3.Plugins.System.Cnds.CompareVar,
+		C3.Plugins.System.Acts.SubVar,
+		C3.Plugins.Sprite.Cnds.OnCollision,
+		C3.Plugins.Sprite.Acts.SubInstanceVar,
+		C3.Plugins.Sprite.Acts.Destroy,
+		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
+		C3.Plugins.System.Cnds.PickRandom,
+		C3.Behaviors.Turret.Acts.AddTarget,
+		C3.Behaviors.Turret.Cnds.OnShoot,
+		C3.Behaviors.Bullet.Cnds.CompareTravelled,
+		C3.Plugins.Touch.Cnds.OnTouchObject,
+		C3.Plugins.System.Acts.CreateObject,
+		C3.Plugins.Touch.Exps.X,
+		C3.Plugins.Touch.Exps.Y,
+		C3.Plugins.Sprite.Cnds.IsOverlapping
+	];
+};
+self.C3_JsPropNameTable = [
+	{health: 0},
+	{Pathfinding: 0},
+	{Flash: 0},
+	{Enemy: 0},
+	{Touch: 0},
+	{GridBackground: 0},
+	{Solid: 0},
+	{Wall: 0},
+	{EnemyTarget: 0},
+	{Turret: 0},
+	{Bullet: 0},
+	{EnemySpawner: 0},
+	{BulletImpactParticles: 0},
+	{EnemyDeadParticles: 0},
+	{Text: 0},
+	{Text2: 0},
+	{EnemySpawnTime: 0}
+];
+
+self.InstanceType = {
+	Enemy: class extends self.ISpriteInstance {},
+	Touch: class extends self.IInstance {},
+	GridBackground: class extends self.ITiledBackgroundInstance {},
+	Wall: class extends self.ITiledBackgroundInstance {},
+	EnemyTarget: class extends self.ISpriteInstance {},
+	Turret: class extends self.ISpriteInstance {},
+	Bullet: class extends self.ISpriteInstance {},
+	EnemySpawner: class extends self.ISpriteInstance {},
+	BulletImpactParticles: class extends self.IParticlesInstance {},
+	EnemyDeadParticles: class extends self.IParticlesInstance {},
+	Text: class extends self.ITextInstance {},
+	Text2: class extends self.ITextInstance {}
+}

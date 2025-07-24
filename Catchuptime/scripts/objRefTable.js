@@ -1,0 +1,71 @@
+const C3 = self.C3;
+self.C3_GetObjectRefTable = function () {
+	return [
+		C3.Plugins.Sprite,
+		C3.Behaviors.Bullet,
+		C3.Behaviors.solid,
+		C3.Plugins.Text,
+		C3.Behaviors.Flash,
+		C3.Plugins.Keyboard,
+		C3.Plugins.Date,
+		C3.Plugins.Audio,
+		C3.Plugins.System.Cnds.IsGroupActive,
+		C3.Plugins.System.Cnds.OnSuspend,
+		C3.Plugins.System.Acts.SetVar,
+		C3.Plugins.System.Exps.wallclocktime,
+		C3.Plugins.System.Cnds.OnResume,
+		C3.Plugins.System.Acts.SetBoolVar,
+		C3.Plugins.System.Exps.time,
+		C3.Plugins.System.Acts.SetDeltaTimeMinMax,
+		C3.Plugins.System.Acts.SetFramerateMode,
+		C3.Plugins.System.Acts.SetLayerVisible,
+		C3.Plugins.System.Cnds.CompareBoolVar,
+		C3.Plugins.System.Cnds.Compare,
+		C3.Plugins.Text.Acts.SetText,
+		C3.Plugins.System.Cnds.OnLayoutStart,
+		C3.Behaviors.Bullet.Acts.SetAngleOfMotion,
+		C3.Plugins.System.Exps.random,
+		C3.Plugins.System.Cnds.Every,
+		C3.Plugins.System.Cnds.PickRandom,
+		C3.Plugins.Sprite.Cnds.OnCollision,
+		C3.Plugins.System.Acts.AddVar,
+		C3.Behaviors.Flash.Acts.Flash,
+		C3.Plugins.System.Cnds.EveryTick,
+		C3.Plugins.Date.Exps.ToTimerHours,
+		C3.Plugins.Date.Exps.ToTimerMinutes,
+		C3.Plugins.Date.Exps.ToTimerSeconds,
+		C3.Plugins.System.Exps.fps,
+		C3.Plugins.Keyboard.Cnds.OnKey,
+		C3.Plugins.Audio.Acts.Play
+	];
+};
+self.C3_JsPropNameTable = [
+	{Bullet: 0},
+	{Ball: 0},
+	{Solid: 0},
+	{Block: 0},
+	{Text: 0},
+	{Flash: 0},
+	{Star: 0},
+	{ScoreText: 0},
+	{Keyboard: 0},
+	{Date: 0},
+	{CatchUpProgress: 0},
+	{gameSound: 0},
+	{Score: 0},
+	{SuspendWallClockTime: 0},
+	{IsCatchingUp: 0},
+	{CatchUpFromGameTime: 0}
+];
+
+self.InstanceType = {
+	Ball: class extends self.ISpriteInstance {},
+	Block: class extends self.ISpriteInstance {},
+	Text: class extends self.ITextInstance {},
+	Star: class extends self.ISpriteInstance {},
+	ScoreText: class extends self.ITextInstance {},
+	Keyboard: class extends self.IInstance {},
+	Date: class extends self.IInstance {},
+	CatchUpProgress: class extends self.ITextInstance {},
+	gameSound: class extends self.IInstance {}
+}
