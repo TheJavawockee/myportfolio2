@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Games - The Javawockee</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <style>
         .tap-game-container {
             max-width: 400px;
@@ -71,23 +71,19 @@
                 <li><a href="contact.html">CONTACT</a></li>
                 <li><a href="gallery.html">GALLERY</a></li>
                 <li><a href="merch.html">MERCH</a></li>
-                <li><a href="games.html">GAMES</a></li>
+                <li><a href="games.html" class="active">GAMES</a></li>
                 <li><a href="sponsorships.html">SPONSORSHIPS</a></li>
             </ul>
         </nav>
         <h1>Games</h1>
-        
-           
-  <li><a href="EscapeTheRoom/index.html" target="_blank">Play Escape The Room Game</a></li>
-  <li><a href="Turretdefense/index.html" target="_blank">Play Turret Defense Game</a></li>
-  <li><a href="FruitSlicer/index.html" target="_blank">Play Fruit Slicer Game</a></li>
-  <li><a href="FreeTheKey/index.html" target="_blank">Play Free The Key Game</a></li>
-  <li><a href="Catchuptime/index.html" target="_blank">Play Catch Up Time Game</a></li>
-  <li><a href="TileMatchGame/index.html" target="_blank">Play TileMatch Game</a></li>
-
-
-    
-
+        <ul>
+          <li><a href="EscapeTheRoom/index.html" target="_blank">Play Escape The Room Game</a></li>
+          <li><a href="Turretdefense/index.html" target="_blank">Play Turret Defense Game</a></li>
+          <li><a href="FruitSlicer/index.html" target="_blank">Play Fruit Slicer Game</a></li>
+          <li><a href="FreeTheKey/index.html" target="_blank">Play Free The Key Game</a></li>
+          <li><a href="Catchuptime/index.html" target="_blank">Play Catch Up Time Game</a></li>
+          <li><a href="TileMatchGame/index.html" target="_blank">Play TileMatch Game</a></li>
+        </ul>
     </header>
     <main>
         <div class="tap-game-container">
@@ -105,7 +101,7 @@
             <div id="tapMessage" style="color:#fff;margin-top:1em;font-size:1.1em;"></div>
             <div id="usernamePrompt" style="display:none; margin-top:1em;">
                 <label for="usernameInput" style="color:#fff;">Enter your name:</label>
-                <input type="text" id="usernameInput" maxlength="16" style="margin:0 0.5em; padding:0.3em; border-radius:5px; border:none;">
+                <input type="text" id="usernameInput" maxlength="16" style="margin:0 0.5em; padding:0.3em; border-radius:5px; border:none;" />
                 <button id="submitScoreBtn" class="tap-btn" style="font-size:1em; padding:0.5em 1em;">Submit</button>
             </div>
             <div id="leaderboard" style="margin-top:2em;">
@@ -165,93 +161,56 @@
             if (!leaderboard[diff]) leaderboard[diff] = [];
         }
 
-        let currentLbTab = 'easy';
+        function saveLeaderboard() {
+            localStorage.setItem('tapLeaderboardV2', JSON.stringify(leaderboard));
+        }
 
-        function updateLeaderboard(tab = currentLbTab) {
-            currentLbTab = tab;
-            leaderboardTabs.forEach(btn => {
-                btn.style.opacity = btn.dataset.diff === tab ? "1" : "0.6";
-            });
+        function canPlayNow() {
+            const now = Date.now();
+            const lastPlayed = JSON.parse(localStorage.getItem('tapPlayedTimestampV2') || '0');
+            const twelveHours = 12 * 60 * 60 * 1000;
+            return (now - lastPlayed) > twelveHours;
+        }
+
+        function setPlayedNow() {
+            localStorage.setItem('tapPlayedTimestampV2', Date.now());
+        }
+
+        function updateLeaderboardUI(diff) {
             leaderboardList.innerHTML = '';
-            leaderboard[tab].slice(0, 5).forEach((entry) => {
+            const scores = leaderboard[diff].slice(0, 10); // top 10
+            if (scores.length === 0) {
+                leaderboardList.innerHTML = '<li style="color:#ccc;">No scores yet.</li>';
+                return;
+            }
+            for (let i = 0; i < scores.length; i++) {
+                const entry = scores[i];
                 const li = document.createElement('li');
-                li.textContent = `${entry.name}: ${entry.score}`;
+                li.textContent = `${i+1}. ${entry.name}: ${entry.score}`;
                 leaderboardList.appendChild(li);
-            });
-        }
-
-        // Helper to get current week number and year
-        function getCurrentWeekKey() {
-            const now = new Date();
-            const onejan = new Date(now.getFullYear(), 0, 1);
-            const week = Math.ceil((((now - onejan) / 86400000) + onejan.getDay() + 1) / 7);
-            return `${now.getFullYear()}-W${week}`;
-        }
-
-        function canPlayThisWeek() {
-            const weekKey = getCurrentWeekKey();
-            const playedWeeks = JSON.parse(localStorage.getItem('tapPlayedWeeks') || '{}');
-            return !playedWeeks[currentDifficulty] || playedWeeks[currentDifficulty] !== weekKey;
-        }
-
-        function setPlayedThisWeek() {
-            const weekKey = getCurrentWeekKey();
-            let playedWeeks = JSON.parse(localStorage.getItem('tapPlayedWeeks') || '{}');
-            playedWeeks[currentDifficulty] = weekKey;
-            localStorage.setItem('tapPlayedWeeks', JSON.stringify(playedWeeks));
-        }
-
-        function showPlayLimitMessage() {
-            tapBtn.disabled = true;
-            tapBtn.textContent = 'Come back next week!';
-            tapMessage.textContent = 'You can only play this difficulty once per week. Try another difficulty or come back next week!';
-            usernamePrompt.style.display = 'none';
-        }
-
-        function resetGameUI() {
-            tapScore.textContent = '0';
-            tapBtn.disabled = false;
-            tapBtn.textContent = 'Tap to Score!';
-            tapMessage.textContent = '';
-            usernamePrompt.style.display = 'none';
-            tapBtn.className = 'tap-btn ' + DIFFICULTY_SETTINGS[currentDifficulty].btnClass;
-            tapTimer.textContent = `Time: ${DIFFICULTY_SETTINGS[currentDifficulty].time}s`;
-            resetRewardUI();
-        }
-
-        // Reset reward UI
-        function resetRewardUI() {
-            claimRewardContainer.style.display = 'none';
-            rewardMsg.textContent = '';
-        }
-
-        // Helper to check if reward should be shown
-        function checkShowReward() {
-            if (score >= REWARD_THRESHOLDS[currentDifficulty]) {
-                claimRewardContainer.style.display = 'block';
-            } else {
-                claimRewardContainer.style.display = 'none';
-                rewardMsg.textContent = '';
             }
         }
 
         function startGame() {
-            if (!canPlayThisWeek()) {
+            currentDifficulty = difficultySelect.value;
+            if (!canPlayNow()) {
                 showPlayLimitMessage();
                 resetRewardUI();
                 return;
             }
             score = 0;
             timeLeft = DIFFICULTY_SETTINGS[currentDifficulty].time;
+            gameActive = true;
             tapScore.textContent = score;
             tapTimer.textContent = `Time: ${timeLeft}s`;
-            tapMessage.textContent = '';
-            usernamePrompt.style.display = 'none';
-            gameActive = true;
             tapBtn.disabled = false;
             tapBtn.textContent = 'Tap to Score!';
             tapBtn.className = 'tap-btn ' + DIFFICULTY_SETTINGS[currentDifficulty].btnClass;
-            resetRewardUI();
+            tapMessage.textContent = '';
+            usernamePrompt.style.display = 'none';
+            claimRewardContainer.style.display = 'none';
+            rewardMsg.textContent = '';
+            if (timer) clearInterval(timer);
             timer = setInterval(() => {
                 timeLeft--;
                 tapTimer.textContent = `Time: ${timeLeft}s`;
@@ -259,15 +218,39 @@
                     clearInterval(timer);
                     gameActive = false;
                     tapBtn.disabled = true;
-                    tapBtn.textContent = 'Game Over';
-                    tapMessage.textContent = `Final Score: ${score}`;
+                    tapMessage.textContent = 'Game over! Your score: ' + score;
                     usernamePrompt.style.display = 'block';
-                    usernameInput.value = '';
-                    usernameInput.focus();
-                    setPlayedThisWeek();
-                    checkShowReward();
+                    setPlayedNow();
+                    checkReward(score);
                 }
             }, 1000);
+        }
+
+        function resetRewardUI() {
+            claimRewardContainer.style.display = 'none';
+            rewardMsg.textContent = '';
+        }
+
+        function showPlayLimitMessage() {
+            tapBtn.disabled = true;
+            tapBtn.textContent = 'Come back later!';
+            tapMessage.textContent = 'You can only play once every 12 hours. Please try again later!';
+            usernamePrompt.style.display = 'none';
+        }
+
+        function checkReward(score) {
+            const threshold = REWARD_THRESHOLDS[currentDifficulty];
+            if (score >= threshold) {
+                claimRewardContainer.style.display = 'block';
+            } else {
+                claimRewardContainer.style.display = 'none';
+            }
+        }
+
+        function claimReward() {
+            claimRewardBtn.disabled = true;
+            rewardMsg.textContent = 'Reward claimed! Thanks for playing.';
+            // Optionally: add any reward logic here
         }
 
         tapBtn.addEventListener('click', () => {
@@ -276,72 +259,65 @@
             } else {
                 score++;
                 tapScore.textContent = score;
-                checkShowReward();
             }
         });
 
         submitScoreBtn.addEventListener('click', () => {
-            const name = usernameInput.value.trim() || 'Anonymous';
-            leaderboard[currentDifficulty].push({ name, score });
-            leaderboard[currentDifficulty].sort((a, b) => b.score - a.score);
-            leaderboard[currentDifficulty] = leaderboard[currentDifficulty].slice(0, 5);
-            localStorage.setItem('tapLeaderboardV2', JSON.stringify(leaderboard));
-            updateLeaderboard(currentDifficulty);
+            const name = usernameInput.value.trim();
+            if (name.length === 0) {
+                alert('Please enter your name.');
+                return;
+            }
+            // Add score to leaderboard, sorted descending
+            leaderboard[currentDifficulty].push({name: name, score: score});
+            leaderboard[currentDifficulty].sort((a,b) => b.score - a.score);
+            // Keep only top 10
+            leaderboard[currentDifficulty] = leaderboard[currentDifficulty].slice(0, 10);
+            saveLeaderboard();
             usernamePrompt.style.display = 'none';
-            tapMessage.textContent = `Thanks, ${name}! Your score was saved.`;
+            tapMessage.textContent = 'Score submitted! Thanks, ' + name + '.';
+            usernameInput.value = '';
+            updateLeaderboardUI(currentDifficulty);
         });
 
-        // Allow pressing Enter to submit
-        usernameInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                submitScoreBtn.click();
-            }
-        });
-
-        // Difficulty change handler
-        difficultySelect.addEventListener('change', (e) => {
-            currentDifficulty = e.target.value;
-            resetGameUI();
-            gameActive = false;
-            if (timer) clearInterval(timer);
-            updateLeaderboard(currentDifficulty);
-            if (!canPlayThisWeek()) {
+        difficultySelect.addEventListener('change', () => {
+            currentDifficulty = difficultySelect.value;
+            tapBtn.className = 'tap-btn ' + DIFFICULTY_SETTINGS[currentDifficulty].btnClass;
+            updateLeaderboardUI(currentDifficulty);
+            resetRewardUI();
+            if (!canPlayNow()) {
                 showPlayLimitMessage();
+            } else {
+                tapBtn.disabled = false;
+                tapBtn.textContent = 'Tap to Score!';
+                tapMessage.textContent = '';
             }
         });
 
-        // Leaderboard tab switching
         leaderboardTabs.forEach(btn => {
             btn.addEventListener('click', () => {
-                updateLeaderboard(btn.dataset.diff);
+                const diff = btn.getAttribute('data-diff');
+                difficultySelect.value = diff;
+                difficultySelect.dispatchEvent(new Event('change'));
             });
         });
 
-        // Show leaderboard on load
-        updateLeaderboard();
+        claimRewardBtn.addEventListener('click', claimReward);
 
-        // Set initial difficulty UI and check play limit
-        resetGameUI();
-        if (!canPlayThisWeek()) {
+        // Initialize
+        currentDifficulty = difficultySelect.value;
+        updateLeaderboardUI(currentDifficulty);
+        if (!canPlayNow()) {
             showPlayLimitMessage();
         }
-
-        // Claim reward button handler
-        if (claimRewardBtn) {
-            claimRewardBtn.onclick = function () {
-                rewardMsg.textContent = "Congratulations! You've claimed your reward!";
-                claimRewardBtn.disabled = true;
-            };
-        }
     </script>
-    <p style="text-align:center; margin-top:1.5em;">
-        <a href="https://grabtap.com/c/itsjoesmama?utm_source=app_share&utm_medium=share&utm_campaign=community_page&utm_content=itsjoesmama" target="_blank" rel="noopener">
-            <img src="images/grabtap.jpg" alt="Join and Earn with GrabTap" style="max-width:320px;width:100%;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.12);margin:1em 0;">
-        </a>
-    </p>
-    
-</body>
+
+<p style="text-align:center;">
+                <img src="Images/grabtap.jpg" alt="Join and Earn with GrabTap" style="max-width:320px;width:100%;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.12);margin:1em 0;">
+            </p>
+            
 <footer>
         <p>&copy; 2025 The Javawockee</p>
     </footer>
+</body>
 </html>
