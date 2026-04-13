@@ -51,8 +51,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Text.Acts.MoveToTop,
 		C3.Plugins.Button.Cnds.OnClicked,
 		C3.Plugins.System.Acts.RestartLayout,
-		C3.Plugins.System.Acts.GoToLayout,
-		C3.Plugins.Audio.Acts.Play
+		C3.Plugins.Audio.Acts.Play,
+		C3.Plugins.System.Acts.GoToLayout
 	];
 };
 self.C3_JsPropNameTable = [
@@ -75,6 +75,8 @@ self.C3_JsPropNameTable = [
 	{ButtonRestart: 0},
 	{LocalStorage: 0},
 	{HighScoreText: 0},
+	{Sprite2: 0},
+	{Bird2: 0},
 	{SecondsPerObstacle: 0},
 	{JumpStrength: 0},
 	{SCROLLSPEED: 0},
@@ -100,5 +102,7 @@ self.InstanceType = {
 	GameOverScore: class extends self.ITextInstance {},
 	ButtonRestart: class extends self.IButtonInstance {},
 	LocalStorage: class extends self.IInstance {},
-	HighScoreText: class extends self.ITextInstance {}
+	HighScoreText: class extends self.ITextInstance {},
+	Sprite2: class extends self.ISpriteInstance {},
+	Bird2: class extends self.ISpriteInstance {}
 }
