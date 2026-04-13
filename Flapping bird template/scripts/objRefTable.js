@@ -8,6 +8,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Text,
 		C3.Plugins.Browser,
 		C3.Plugins.Touch,
+		C3.Plugins.Audio,
+		C3.Plugins.LocalStorage,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.Text.Acts.SetText,
@@ -16,14 +18,24 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.Destroy,
 		C3.Behaviors.Platform.Acts.SetVectorY,
 		C3.Plugins.Sprite.Acts.SetAngle,
+		C3.Plugins.LocalStorage.Acts.GetItem,
+		C3.Plugins.LocalStorage.Cnds.OnItemMissing,
+		C3.Plugins.LocalStorage.Cnds.OnItemGet,
+		C3.Plugins.System.Exps.int,
+		C3.Plugins.LocalStorage.Exps.ItemValue,
 		C3.Plugins.Touch.Cnds.OnTouchStart,
 		C3.Plugins.System.Cnds.EveryTick,
 		C3.Plugins.Sprite.Acts.RotateClockwise,
 		C3.Plugins.System.Exps.dt,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
-		C3.Plugins.System.Acts.GoToLayoutByName,
-		C3.Plugins.System.Acts.GoToLayout,
+		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.Sprite.Cnds.IsOutsideLayout,
+		C3.Plugins.System.Cnds.CompareBoolVar,
+		C3.Plugins.System.Acts.SetTimescale,
+		C3.Plugins.Button.Acts.SetVisible,
+		C3.Plugins.Text.Acts.SetVisible,
+		C3.Plugins.System.Cnds.Compare,
+		C3.Plugins.LocalStorage.Acts.SetItem,
 		C3.Plugins.Sprite.Cnds.CompareX,
 		C3.Plugins.Sprite.Exps.X,
 		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
@@ -37,7 +49,10 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.random,
 		C3.Plugins.Sprite.Exps.Y,
 		C3.Plugins.Text.Acts.MoveToTop,
-		C3.Plugins.Button.Cnds.OnClicked
+		C3.Plugins.Button.Cnds.OnClicked,
+		C3.Plugins.System.Acts.RestartLayout,
+		C3.Plugins.System.Acts.GoToLayout,
+		C3.Plugins.Audio.Acts.Play
 	];
 };
 self.C3_JsPropNameTable = [
@@ -54,9 +69,17 @@ self.C3_JsPropNameTable = [
 	{Sprite: 0},
 	{Browser: 0},
 	{Touch: 0},
+	{Audio: 0},
+	{GameOverText: 0},
+	{GameOverScore: 0},
+	{ButtonRestart: 0},
+	{LocalStorage: 0},
+	{HighScoreText: 0},
 	{SecondsPerObstacle: 0},
 	{JumpStrength: 0},
 	{SCROLLSPEED: 0},
+	{GameOver: 0},
+	{HighScore: 0},
 	{Score: 0}
 ];
 
@@ -71,5 +94,11 @@ self.InstanceType = {
 	ScoreText: class extends self.ITextInstance {},
 	Sprite: class extends self.ISpriteInstance {},
 	Browser: class extends self.IInstance {},
-	Touch: class extends self.IInstance {}
+	Touch: class extends self.IInstance {},
+	Audio: class extends self.IInstance {},
+	GameOverText: class extends self.ITextInstance {},
+	GameOverScore: class extends self.ITextInstance {},
+	ButtonRestart: class extends self.IButtonInstance {},
+	LocalStorage: class extends self.IInstance {},
+	HighScoreText: class extends self.ITextInstance {}
 }
