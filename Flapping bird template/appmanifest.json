@@ -1,7 +1,7 @@
 {
 	"name": "Flapping bird",
 	"short_name": "Flapping bird",
-	"description": "",
+	"description": "Learning to make this game my own",
 	"start_url": "index.html",
 	"display": "fullscreen",
 	"orientation": "portrait",
