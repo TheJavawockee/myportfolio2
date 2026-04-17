@@ -82,6 +82,7 @@ self.C3_JsPropNameTable = [
 	{HighScoreText: 0},
 	{Sprite2: 0},
 	{Bird2: 0},
+	{Sine: 0},
 	{Text: 0},
 	{Text2: 0},
 	{Text3: 0},
@@ -92,8 +93,8 @@ self.C3_JsPropNameTable = [
 	{houseSmallAlt2: 0},
 	{ButtonQuit: 0},
 	{NewScoreText: 0},
-	{Sine: 0},
 	{TiledBackground3: 0},
+	{StartMessageText: 0},
 	{SecondsPerObstacle: 0},
 	{JumpStrength: 0},
 	{SCROLLSPEED: 0},
@@ -132,5 +133,6 @@ self.InstanceType = {
 	houseSmallAlt2: class extends self.ISpriteInstance {},
 	ButtonQuit: class extends self.IButtonInstance {},
 	NewScoreText: class extends self.ITextInstance {},
-	TiledBackground3: class extends self.ITiledBackgroundInstance {}
+	TiledBackground3: class extends self.ITiledBackgroundInstance {},
+	StartMessageText: class extends self.ITextInstance {}
 }

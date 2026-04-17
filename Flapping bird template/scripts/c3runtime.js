@@ -1440,7 +1440,11 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(200, 100);
 		},
-		() => -5
+		() => -5,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("Ready to flap like a legend?", "Warning: pipes have no mercy.", "Flap responsibly.", "You vs gravity… good luck.", "This bird skipped flying lessons.", "Try not to embarrass the bird.", "Tap like your high score depends on it… because it does.", "Welcome back, Flap Master.", "Don’t hit the pipes. Seriously.", "Flap first, panic later.");
+		}
 ];
 
 
