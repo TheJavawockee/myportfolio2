@@ -33,5 +33,6 @@
 			"type": "image/png"
 		}
 	],
-	"screenshots": []
+	"screenshots": [],
+	"theme_color": "#ffffff"
 }

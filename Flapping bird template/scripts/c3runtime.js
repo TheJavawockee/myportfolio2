@@ -1363,10 +1363,25 @@ function or(l, r)
 
 self.C3_ExpressionFuncs = [
 		() => "Start",
+		() => 300,
 		() => 0,
-		() => -500,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (-v0.GetValue());
+		},
 		() => 320,
 		() => 1,
+		() => 100,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => f0((v1.GetValue() - 0.01), 30);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => and("Energy: ", f0(v1.GetValue()));
+		},
 		() => "HighScore",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -1375,10 +1390,16 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "Movement",
 		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (500 - ((100 - v0.GetValue()) * 5));
+		},
+		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (60 * f0());
 		},
 		() => "Collisions",
+		() => -1023,
+		() => 35,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0("Unlucky… try again!", "You nearly had it!", "That pipe came out of nowhere 😅", "Focus… you got this!", "Okay… that was rough 😂", "Flap smarter, not harder!", "You're improving 👀", "Again. Right now. Go!", "Gravity is a cruel mistress.", "The pipes are winning. Don't let them.", "Was that a sneeze? Or just bad timing?", "I’ve seen better flapping from a penguin.", "The bird deserves better than this.", "Is your screen greasy? Wipe it off!", "Maybe try flapping... upwards?", "That pipe was definitely cheating.", "Physics: 1, Bird: 0.", "You’re making the pipes look good.", "So close, yet so very far.", "Did you forget how to physics?", "The bird is disappointed in you.", "Take a deep breath. Now flap!", "I believe in you! (Mostly).", "The pipes are laughing at us.", "That was a graceful faceplant.", "Try not to hit the green things.", "Your wings are tired, but your heart is strong!", "New strategy: Don't hit the pipes.", "I've seen toast with better reflexes.", "You're doing great! (For a beginner).", "Are you playing with your elbows?", "Wait, was that a world record? Oh, no.", "The bird needs a vacation after that one.", "One more try? I won't tell anyone.", "You're becoming a professional pipe-hitter.", "Is your thumb okay?", "That was almost impressive!", "Pipes: the natural enemy of the flapper.", "Maybe the bird needs a helmet?", "Legend says if you flap enough, you win.", "Your high score is safe... for now.", "That was a tactical error.", "Don't quit your day job just yet.", "The pipes aren't moving, you are!", "Focus! Channel your inner eagle.", "If at first you don't succeed, flap again.", "That was a bold move. It didn't pay off.", "You hit that pipe with a lot of confidence.", "I'm not mad, I'm just disappointed.", "The sky is the limit! (But the pipes are the obstacle).", "Who put that pipe there?!");
@@ -1401,14 +1422,25 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject();
 		},
+		() => 3,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => f0(v1.GetValue(), 100);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (225 + (v0.GetValue() * 4));
+		},
 		() => "Background",
 		() => -560,
 		() => -410,
 		() => 540,
 		p => {
 			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => (n0.ExpObject() - (300 * f1()));
+			const v1 = p._GetNode(1).GetVar();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			return () => (n0.ExpObject() - (v1.GetValue() * f2()));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -1429,17 +1461,14 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(2, 5);
+			return () => f0(0, 100);
 		},
+		() => 30,
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(400, 720);
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 370);
 		},
-		() => 453,
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(200, 100);
-		},
+		() => "Restart",
 		() => -5,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
