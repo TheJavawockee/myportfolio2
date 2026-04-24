@@ -5,19 +5,21 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Platform,
 		C3.Plugins.Button,
 		C3.Plugins.TiledBg,
+		C3.Behaviors.solid,
 		C3.Plugins.Text,
 		C3.Plugins.Browser,
 		C3.Plugins.Touch,
 		C3.Plugins.Audio,
 		C3.Plugins.LocalStorage,
 		C3.Behaviors.Sin,
+		C3.Plugins.Keyboard,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.System.Cnds.OnLayoutStart,
+		C3.Behaviors.Platform.Acts.SetVectorY,
 		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.Text.Acts.SetText,
 		C3.Plugins.TiledBg.Acts.SetX,
 		C3.Plugins.Sprite.Acts.Destroy,
-		C3.Behaviors.Platform.Acts.SetVectorY,
 		C3.Plugins.Sprite.Acts.SetAngle,
 		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.System.Acts.SetTimescale,
@@ -29,6 +31,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.LocalStorage.Cnds.OnItemMissing,
 		C3.Plugins.LocalStorage.Cnds.OnItemGet,
 		C3.Plugins.LocalStorage.Exps.ItemValue,
+		C3.Plugins.System.Cnds.CompareVar,
+		C3.Plugins.Sprite.Acts.SetAnim,
 		C3.Plugins.Touch.Cnds.OnTouchStart,
 		C3.Plugins.Sprite.Acts.RotateClockwise,
 		C3.Plugins.System.Exps.dt,
@@ -57,11 +61,15 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.CreateObject,
 		C3.Plugins.System.Exps.random,
 		C3.Plugins.Sprite.Exps.Y,
-		C3.Plugins.Text.Acts.MoveToTop,
 		C3.Plugins.Button.Cnds.OnClicked,
 		C3.Plugins.System.Acts.RestartLayout,
 		C3.Plugins.System.Acts.GoToLayout,
-		C3.Plugins.Audio.Acts.Play
+		C3.Plugins.TiledBg.Cnds.IsVisible,
+		C3.Plugins.TiledBg.Acts.SetOpacity,
+		C3.Plugins.TiledBg.Acts.SetVisible,
+		C3.Plugins.TiledBg.Acts.Destroy,
+		C3.Plugins.Audio.Acts.Play,
+		C3.Plugins.Touch.Cnds.OnTapGestureObject
 	];
 };
 self.C3_JsPropNameTable = [
@@ -69,6 +77,7 @@ self.C3_JsPropNameTable = [
 	{Bird: 0},
 	{ButtonPlay: 0},
 	{TiledBackground: 0},
+	{Solid: 0},
 	{TiledBackground2: 0},
 	{Background: 0},
 	{Scored: 0},
@@ -95,13 +104,17 @@ self.C3_JsPropNameTable = [
 	{StartMessageText: 0},
 	{coin: 0},
 	{EnergyText: 0},
+	{sonic: 0},
+	{Bg2: 0},
+	{Keyboard: 0},
 	{SecondsPerObstacle: 0},
 	{JumpStrength: 0},
 	{SCROLLSPEED: 0},
 	{GameOver: 0},
 	{HighScore: 0},
 	{Score: 0},
-	{Energy: 0}
+	{Energy: 0},
+	{BirdColour: 0}
 ];
 
 self.InstanceType = {
@@ -131,5 +144,8 @@ self.InstanceType = {
 	TiledBackground3: class extends self.ITiledBackgroundInstance {},
 	StartMessageText: class extends self.ITextInstance {},
 	coin: class extends self.ISpriteInstance {},
-	EnergyText: class extends self.ITextInstance {}
+	EnergyText: class extends self.ITextInstance {},
+	sonic: class extends self.ISpriteInstance {},
+	Bg2: class extends self.ITiledBackgroundInstance {},
+	Keyboard: class extends self.IInstance {}
 }
