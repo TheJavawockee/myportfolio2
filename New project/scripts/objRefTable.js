@@ -23,7 +23,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
 		C3.Plugins.Touch.Cnds.OnTouchObject,
 		C3.Plugins.Audio.Cnds.IsAnyPlaying,
-		C3.Plugins.Audio.Acts.FadeVolume
+		C3.Plugins.Audio.Acts.FadeVolume,
+		C3.Plugins.Touch.Cnds.IsTouchingObject,
+		C3.Behaviors.Platform.Acts.SimulateControl
 	];
 };
 self.C3_JsPropNameTable = [
@@ -43,7 +45,10 @@ self.C3_JsPropNameTable = [
 	{Solid: 0},
 	{TiledBackground3: 0},
 	{Door3: 0},
-	{Door4: 0}
+	{Door4: 0},
+	{btnLeft: 0},
+	{btnRight: 0},
+	{btnJump: 0}
 ];
 
 self.InstanceType = {
@@ -60,5 +65,8 @@ self.InstanceType = {
 	TiledBackground2: class extends self.ITiledBackgroundInstance {},
 	TiledBackground3: class extends self.ITiledBackgroundInstance {},
 	Door3: class extends self.ISpriteInstance {},
-	Door4: class extends self.ISpriteInstance {}
+	Door4: class extends self.ISpriteInstance {},
+	btnLeft: class extends self.ISpriteInstance {},
+	btnRight: class extends self.ISpriteInstance {},
+	btnJump: class extends self.ISpriteInstance {}
 }
