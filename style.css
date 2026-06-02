@@ -43,6 +43,10 @@ header{
 }
 .nav a:hover{background:rgba(11,99,246,0.08);color:var(--primary);transform:translateY(-1px)}
 
+/* Mobile nav toggle */
+.nav-toggle{display:none;background:transparent;border:0;font-size:1.25rem;cursor:pointer;padding:0.4rem 0.6rem;border-radius:8px}
+
+
 main{
   max-width:980px;margin:1.5rem auto;padding:1.5rem;background:var(--card);border-radius:var(--radius);box-shadow:0 8px 30px rgba(17,24,39,0.06);
 }
@@ -62,9 +66,35 @@ main{
 
 .modal{display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:1000}
 .modal.open{display:flex}
-.modal-content{background:var(--card);padding:1.25rem 1rem;border-radius:12px;max-width:420px;width:92%;text-align:center;box-shadow:0 12px 40px rgba(2,6,23,0.2)}
+.modal-content{background:var(--card);padding:1.25rem 1rem;border-radius:12px;max-width:420px;width:92%;text-align:center;box-shadow:0 12px 40px rgba(2,6,23,0.2);transform-origin:center center}
 .modal-figure{width:110px;height:auto;margin:0 auto 0.75rem;display:block}
 .close{position:absolute;right:1rem;top:1rem;border:0;background:transparent;font-size:1.25rem;cursor:pointer;color:var(--muted)}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {opacity:0; transform:translateY(10px)}
+  to {opacity:1; transform:translateY(0)}
+}
+@keyframes scaleIn {
+  from {opacity:0; transform:scale(0.96)}
+  to {opacity:1; transform:scale(1)}
+}
+@keyframes fadeOut {
+  from {opacity:1}
+  to {opacity:0}
+}
+
+main.revealed{animation:fadeInUp 420ms ease both}
+.hero h2, .lead, .hero-actions{animation:fadeInUp 560ms ease both}
+.modal.open .modal-content{animation:scaleIn 260ms cubic-bezier(.2,.9,.2,1) both}
+
+/* Page transition class applied before navigation */
+.page-exit{animation:fadeOut 280ms ease forwards}
+
+/* Nav slide for small screens */
+.nav{transition:opacity 220ms ease, transform 220ms ease}
+.nav.open{opacity:1;transform:translateY(0) scale(1)}
+.nav{opacity:0;transform:translateY(-6px) scale(0.98)}
 
 footer{max-width:1100px;margin:1.5rem auto;padding:1rem;color:var(--muted);text-align:center}
 
@@ -74,6 +104,13 @@ footer{max-width:1100px;margin:1.5rem auto;padding:1rem;color:var(--muted);text-
   .nav{gap:0.4rem}
   .brand{font-size:1rem}
   .hero h2{font-size:1.15rem}
+
+  .nav-toggle{display:inline-block}
+  .nav{position:fixed;top:64px;right:12px;flex-direction:column;background:var(--card);padding:0.5rem;border-radius:10px;box-shadow:0 8px 24px rgba(2,6,23,0.12);display:none;min-width:160px}
+  .nav.open{display:flex}
+  .nav a{display:block;padding:0.7rem 1rem;color:var(--text)}
+
+  .btn{padding:0.9rem 1.1rem;font-size:1rem}
 }
 
 /* Accessibility focus states */

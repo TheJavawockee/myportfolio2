@@ -10,8 +10,9 @@
     <header>
         <div class="topbar">
             <h1 class="brand"><a href="index.html">The Javawockee</a></h1>
+            <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
             <nav>
-                <ul class="nav">
+                <ul class="nav" id="siteNav">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
@@ -57,13 +58,47 @@
             formDiv.style.display = formDiv.style.display === 'none' ? 'block' : 'none';
         };
 
-        // Modal demo
+        // Modal demo with animation
         const helloBtn = document.getElementById('helloBtn');
         const modal = document.getElementById('customModal');
         const closeModal = document.getElementById('closeModal');
-        helloBtn && helloBtn.addEventListener('click', () => modal.classList.add('open'));
-        closeModal && closeModal.addEventListener('click', () => modal.classList.remove('open'));
-        modal && modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
+        helloBtn && helloBtn.addEventListener('click', () => {
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+        closeModal && closeModal.addEventListener('click', () => {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+        modal && modal.addEventListener('click', (e) => { if (e.target === modal) { modal.classList.remove('open'); document.body.style.overflow = ''; } });
+
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const siteNav = document.getElementById('siteNav');
+        navToggle && navToggle.addEventListener('click', () => {
+            const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', String(!expanded));
+            siteNav.classList.toggle('open');
+        });
+
+        // Page reveal on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainEl = document.querySelector('main');
+            requestAnimationFrame(() => mainEl && mainEl.classList.add('revealed'));
+        });
+
+        // Link navigation with fade-out
+        document.querySelectorAll('a[href]').forEach((a) => {
+            const href = a.getAttribute('href');
+            // Only intercept same-origin HTML links
+            if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('http')) return;
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const mainEl = document.querySelector('main');
+                mainEl && mainEl.classList.add('page-exit');
+                setTimeout(() => { window.location.href = href; }, 300);
+            });
+        });
     </script>
 </body>
 </html>
