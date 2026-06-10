@@ -113,6 +113,48 @@ footer{max-width:1100px;margin:1.5rem auto;padding:1rem;color:var(--muted);text-
   .btn{padding:0.9rem 1.1rem;font-size:1rem}
 }
 
+.merch-hero {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.shop-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #00d4ff;
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.featured-products {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.product-card {
+    width: 300px;
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    display: block;
+}
+
+.product-card h3,
+.product-card p {
+    padding: 10px;
+}
+
+
 /* Accessibility focus states */
 .nav a:focus,.btn:focus{outline:3px solid rgba(11,99,246,0.15);outline-offset:3px}
 
